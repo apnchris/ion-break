@@ -46,14 +46,20 @@ const { title } = Astro.props;
     <ViewTransitions />
   </head>
   <body>
+    <header class="header">
+      <a
+      class="header__title"
+      href="/"
+      >
+        <img
+          class="logos__entry"
+          src="/img/logo.png"
+          alt="Sanity Logo"
+          id="logo"
+        />
+      </a>
+    </header>
     <div class="container">
-      <header class="header">
-        <a
-          class="header__title"
-          href="/"
-          >Astro + Sanity</a
-        >
-      </header>
       <main>
         <slot />
       </main>
@@ -80,6 +86,18 @@ const { title } = Astro.props;
 </html>
 
 <style>
+  html {
+    background-color: #000;
+  }
+
+  #logo {
+    position: fixed;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    width: 250px;
+  }
   .container {
     margin: 0 auto;
   }

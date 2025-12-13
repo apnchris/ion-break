@@ -1,13 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
-/**
- * Post schema.  Define and edit the fields for the 'post' content type.
- * Learn more: https://www.sanity.io/docs/schema-types
- */
-
 export default defineType({
-  name: 'post',
-  title: 'Post',
+  name: 'taste',
+  title: 'Taste',
   type: 'document',
   fields: [
     defineField({
@@ -26,31 +21,26 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'excerpt',
-      title: 'Excerpt',
+      name: 'description',
+      title: 'Description',
       type: 'text',
       rows: 4,
     }),
     defineField({
       name: 'mainImage',
-      title: 'Main image',
+      title: 'Image',
       type: 'image',
       options: {
         hotspot: true,
       },
-			fields: [
-				defineField({
-					name: 'alt',
-					title: 'Alternative text',
-					type: 'string',
-				}),
-			],
-    }),
-    defineField({
-      name: 'body',
-      title: 'Body',
-      type: 'blockContent',
-    }),
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alternative text',
+          type: 'string',
+        }),
+      ],
+    })
   ],
   preview: {
     select: {
