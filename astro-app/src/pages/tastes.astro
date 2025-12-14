@@ -1,0 +1,13 @@
+---
+import Card from "../components/Card.astro";
+import Layout from "../layouts/Layout.astro";
+import { getTastes } from "../utils/sanity";
+
+const tastes = await getTastes();
+---
+
+<Layout title="Products - ION Break">
+  <section>
+    {tastes.length ? tastes.map((taste) => <Card taste={taste} />) : ''}
+  </section>
+</Layout>
