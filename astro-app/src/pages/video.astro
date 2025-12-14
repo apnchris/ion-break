@@ -46,12 +46,20 @@ const fullVideo = await getFullVideo();
 </Layout>
 
 <style>
-  #video-wrapper {
+  #video-container {
     position: fixed;
     top: 50%;
-    left: 49%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    height: 52dvh;
+    height: 75dvh;
+  }
+
+  #video-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-52%, -50%);
+    height: 69%;
     width: auto;
   }
 
@@ -62,11 +70,11 @@ const fullVideo = await getFullVideo();
   }
 
   #video-frame-container {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 75dvh;
+    height: 100%;
     pointer-events: none;
   }
 

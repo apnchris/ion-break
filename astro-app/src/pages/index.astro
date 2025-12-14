@@ -22,3 +22,31 @@ const posts = await getPosts();
     />
   </a>
 </Layout>
+
+<style>
+  #clip-button {
+    position: fixed;
+    top: 45%;
+    left: 53%;
+    width: 47vw;
+    z-index: 10;
+    transform: translate(-100%, -50%);
+    max-width: 700px;
+  }
+
+  #tastes-button {
+    position: fixed;
+    top: 60%;
+    left: 41%;
+    width: 47vw;
+    z-index: 10;
+    transform: translate(0%, -50%) rotate(22deg);
+    max-width: 700px;
+  }
+
+  #clip-button-img,
+  #tastes-button-img {
+    width: 100%;
+    height: auto;
+  }
+</style>

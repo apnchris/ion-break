@@ -1,5 +1,4 @@
 ---
-import { formatDate } from "../utils";
 import { urlFor } from "../utils/image";
 import type { Taste } from "../utils/sanity";
 
@@ -11,32 +10,56 @@ const { taste } = Astro.props;
 ---
 
 <div class="card">
+  <h3 class="card-title display uppercase">
+    {taste.title}
+  </h3>
+  
   {
     taste.mainImage ? (
       <img
-        class="card__cover"
-        src={urlFor(taste.mainImage).width(500).height(300).url()}
+        class="card-cover"
+        src={urlFor(taste.mainImage).url()}
         alt={taste.mainImage.alt || ""}
       />
     ) : (
-      <div class="card__cover--none" />
+      <div class="card-cover--none" />
     )
   }
-  <div class="card__container">
-    <h3 class="card__title">
-      <a
-        class="card__link"
-        href={`/taste/${taste.slug.current}`}
-      >
-        {taste.title}
-      </a>
-    </h3>
-    <p class="card__excerpt">{taste.description}</p>
-    <p class="card__date">
-      {formatDate(taste._createdAt)}
+
+  <div class="card-description-container mono">
+    <p>
+      [<span class="card-current-index">01</span>/<span class="card-total-count">99</span>]
+    </p>
+
+    <p class="card-description">
+      {taste.description}
     </p>
   </div>
 </div>
 
 <style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45vw;
+  }
+
+  .card-title,
+  .card-description-container {
+    color: #fff;
+    text-align: center;
+  }
+
+  .card-title {
+    font-size: 30px;
+  }
+
+  .card-cover {
+    width: 40vw;
+  }
+  
+  .card-description-container {
+    font-size: 12px;
+  }
 </style>
