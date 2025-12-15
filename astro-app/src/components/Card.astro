@@ -11,62 +11,79 @@ interface Props {
 const { taste, currentIndex, totalCount } = Astro.props;
 ---
 
-<div class="card">
-  <h3 class="card-title display uppercase">
-    {taste.title}
-  </h3>
-  
-  {
-    taste.mainImage ? (
-      <img
-        class="card-cover"
-        src={urlFor(taste.mainImage).width(2000).height(1600).url()}
-        alt={taste.mainImage.alt || ""}
-      />
-    ) : (
-      <div class="card-cover--none" />
-    )
-  }
+  <div class="card" data-tilt>
+    <h3 class="card-title display uppercase">
+      {taste.title}
+    </h3>
+    
+    <hover-tilt tilt-factor="1.4" scale-factor="1">
+      {
+        taste.mainImage ? (
+          <img
+            class="card-cover"
+            src={urlFor(taste.mainImage).width(2000).height(1600).url()}
+            alt={taste.mainImage.alt || ""}
+          />
+        ) : (
+          <div class="card-cover--none" />
+        )
+      }
+    </hover-tilt>
 
-  <div class="card-description-container mono">
-    <p>
-      [<span class="card-current-index">{String(currentIndex).padStart(2, '0')}</span>/<span class="card-total-count">{String(totalCount).padStart(2, '0')}</span>]
-    </p>
+    <div class="card-description-container mono">
+      <p>
+        [<span class="card-current-index">{String(currentIndex).padStart(2, '0')}</span>/<span class="card-total-count">{String(totalCount).padStart(2, '0')}</span>]
+      </p>
 
-    <p class="card-description">
-      {taste.description}
-    </p>
+      <p class="card-description">
+        {taste.description}
+      </p>
+    </div>
   </div>
-</div>
 
 <style>
+  hover-tilt {
+    --hover-tilt-glare-intensity: 0;
+  }
+
   .card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 45vw;
-    max-width: 450px;
+    width: 50vw;
+    max-width: 500px;
+    gap: 20px;
   }
 
   .card-title,
   .card-description-container {
     color: #fff;
     text-align: center;
+    transition: opacity 0.4s ease;
   }
 
   .card-title {
+    width: 60vw;
     font-size: 30px;
+    font-size: 3vw;
+    font-size: clamp(1.875rem, -0.8036rem + 2.8571vw, 3.125rem);
     line-height: 82%;
     height: 24px;
     display: flex;
     align-items: end;
+    justify-content: space-around;
   }
 
   .card-cover {
-    width: 40vw;
+    width: 45vw;
+    max-width: 900px;
+    transition: transform 0.3s ease, filter 0.3s ease;
   }
   
   .card-description-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     font-size: 12px;
     height: 43px;
   }

@@ -10,6 +10,14 @@ const fullVideo = await getFullVideo();
 
 <Layout title="Video - ION Break">
   <section>
+    <button id="back-button" aria-label="Back Button" onclick="history.back()">
+      <img
+        src="/img/Button_Close.png"
+        alt="Close Button"
+        id="video-frame"
+      />
+    </button>
+    
     <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true">
       <defs>
         <clipPath id="videoClip" clipPathUnits="objectBoundingBox">
@@ -25,7 +33,6 @@ const fullVideo = await getFullVideo();
             id="full-video"
             autoplay
             loop
-            muted
             playsinline
             poster={fullVideo.posterImage}
           >
@@ -42,16 +49,76 @@ const fullVideo = await getFullVideo();
         />
       </div>
     </div>
+
+    <button id="video-play-button" class="video-button" aria-label="Play/Pause Video">
+      <img
+        src="/img/Button_Play.png"
+        alt="Player Frame"
+        id="video-frame"
+      />
+    </button>
+
+    <button id="video-mute-button" class="video-button" aria-label="Mute/Unmute Video">
+      <img
+        src="/img/Button_Mute.png"
+        alt="Player Frame"
+        id="video-frame"
+      />
+    </button>
   </section>
 </Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('full-video') as HTMLVideoElement;
+    const playButton = document.getElementById('video-play-button');
+    const muteButton = document.getElementById('video-mute-button');
+
+    if (video && playButton) {
+      playButton.addEventListener('click', () => {
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+    }
+
+    if (video && muteButton) {
+      muteButton.addEventListener('click', () => {
+        // Fix específico para Chrome
+        if (video.muted) {
+          // Desmutear: hack para Chrome
+          const tempVolume = video.volume;
+          video.volume = 0;
+          video.muted = false;
+          
+          // Fade in rápido para evitar el freeze
+          let vol = 0;
+          const fadeIn = setInterval(() => {
+            if (vol < tempVolume) {
+              vol += 0.1;
+              video.volume = Math.min(vol, tempVolume);
+            } else {
+              clearInterval(fadeIn);
+            }
+          }, 10);
+        } else {
+          // Mutear: directo
+          video.muted = true;
+        }
+      });
+    }
+  });
+</script>
 
 <style>
   #video-container {
     position: fixed;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 75dvh;
+    height: 85dvh;
   }
 
   #video-wrapper {
@@ -81,5 +148,41 @@ const fullVideo = await getFullVideo();
   #video-frame {
     height: 100%;
     width: auto;
+  }
+
+  .video-button {
+    position: fixed;
+    bottom: 9%;
+    height: 15dvh;
+    width: auto;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  #video-play-button {
+    left: calc(50% - 76vh);
+    transform: translateX(150%);
+  }
+
+  #video-mute-button {
+    right: calc(50% - 76vh);
+    transform: translateX(-150%);
+  }
+
+  #back-button {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-10%, 8%);
+    height: 11dvh;
+    width: auto;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    z-index: 10;
   }
 </style>

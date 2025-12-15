@@ -1,0 +1,20 @@
+.swiper-slide:not(.swiper-slide-active) .card-description-container,
+.swiper-slide:not(.swiper-slide-active) .card-title {
+  opacity: 0;
+}
+
+.swiper-slide:not(.swiper-slide-active) .card-cover {
+  transform: scale(.7);
+}
+
+.swiper-slide.swiper-slide-active .card-cover {
+  transform: rotate(4deg);
+}
+
+.swiper-slide:not(.swiper-slide-active) hover-tilt {
+  pointer-events: none;
+}
+
+.swiper-navigation-icon {
+  display: none;
+}

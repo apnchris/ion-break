@@ -8,24 +8,84 @@ const tastes = await getTastes();
 ---
 
 <Layout title="Products - ION Break">
+  <a href="/video" id="clip-button">
+    <img
+      src="/img/Button_Clip.png"
+      alt="Watch the full clip"
+      id="clip-button-img"
+    />
+  </a>
+
   <section>
     <Swiper
       options={{
         loop: true,
-        slidesPerView: 1.8,
+        speed: 400,
+        slidesPerView: 2,
         centeredSlides: true,
         grabCursor: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
       }}>
       <SwiperWrapper>
         {tastes.length ? tastes.map((taste, index) => <SwiperSlide><Card taste={taste} currentIndex={index + 1} totalCount={tastes.length} /></SwiperSlide>) : ''}
         {tastes.length ? tastes.map((taste, index) => <SwiperSlide><Card taste={taste} currentIndex={index + 1} totalCount={tastes.length} /></SwiperSlide>) : ''}
       </SwiperWrapper>
+
+      <div class="swiper-button-prev">
+        <img
+          src="/img/Button_Arrow_Prev.png"
+          alt="Arrow Prev"
+          class="arrow-prev-img"
+        />
+      </div>
+
+      <div class="swiper-button-next">
+        <img
+          src="/img/Button_Arrow_Next.png"
+          alt="Arrow Next"
+          class="arrow-next-img"
+        />
+      </div>
+
+      <img
+        src="/img/ION_Tag.png"
+        alt="ION"
+        id="ion-tag"
+      />
+
+      <img
+        src="/img/Break_Tag.png"
+        alt="Break"
+        id="break-tag"
+      />
     </Swiper>
   </section>
+
 </Layout>
 
+<script type="module" src="https://cdn.jsdelivr.net/npm/hover-tilt/dist/hover-tilt.js"></script>
+
 <style>
+  #clip-button {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 25vw;
+    z-index: 10;
+    transform: rotate(-15deg) translate(-8%, -10%);
+    max-width: 500px;
+  }
+
+  #clip-button-img {
+    width: 100%;
+    height: auto;
+  }
+
   .swiper {
+    position: fixed;
     width: 100vw;
     height: 100dvh;
     padding-top: 75px;
@@ -35,5 +95,75 @@ const tastes = await getTastes();
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+
+  .swiper-slide:not(.swiper-slide-active) {
+    filter: blur(5px);
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    --swiper-navigation-sides-offset: -1vw;
+    --swiper-navigation-size: 18vw;
+    --swiper-navigation-top-offset: calc(50% + 20px);
+    color: #fff;
+    z-index: 90;
+    max-width: 275px;
+  }
+
+  .swiper-button-prev {
+    --swiper-navigation-sides-offset: -2vw;
+  }
+
+  .swiper-button-prev:hover img {
+    transform: rotate(5deg) scale(1.03);
+  }
+
+  .swiper-button-prev:hover:active img {
+    transform: rotate(7deg) scale(1.05);
+  }
+
+  .swiper-button-next:hover img {
+    transform: rotate(-7deg) scale(.95);
+  }
+
+  .swiper-button-next:hover:active img {
+    transform: rotate(-10deg) scale(1);
+  }
+
+  .swiper-button-next svg,
+  .swiper-button-prev svg,
+  .swiper-navigation-icon {
+    display: none;
+  }
+
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    font-size: 30px;
+  }
+
+  .arrow-prev-img,
+  .arrow-next-img {
+    width: 100%;
+  }
+
+  #ion-tag {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 40vh;
+    transform: rotate(180deg) translate(-30%, 10%);
+    z-index: 70;
+    pointer-events: none;
+  }
+
+  #break-tag {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 110vh;
+    transform: rotate(-90deg) translate(-2%, 57%);
+    z-index: 80;
+    pointer-events: none;
   }
 </style>
