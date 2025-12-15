@@ -2,6 +2,7 @@
 // https://docs.astro.build/en/guides/view-transitions/
 import { ViewTransitions } from 'astro:transitions';
 import { getBackgroundVideo } from '../utils/sanity';
+import '../styles/global.css';
 
 interface Props {
   title: string;
@@ -84,9 +85,6 @@ const backgroundVideo = await getBackgroundVideo();
 </style>
 
 <style is:global>
-  :root {
-  }
-
   @font-face {
     font-family: 'Acumin Variable';
     src: url('/fonts/AcuminVariableConcept.woff2') format('woff2');
