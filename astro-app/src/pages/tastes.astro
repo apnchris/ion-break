@@ -8,7 +8,7 @@ const tastes = await getTastes();
 ---
 
 <Layout title="Products - ION Break">
-  <a href="/video" id="clip-button">
+  <a href="/video" id="clip-button" class="glass-button">
     <img
       src="/img/Button_Clip.png"
       alt="Watch the full clip"
@@ -21,13 +21,25 @@ const tastes = await getTastes();
       options={{
         loop: true,
         speed: 400,
-        slidesPerView: 2,
         centeredSlides: true,
         grabCursor: true,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
+        mousewheel: {
+          forceToAxis: false,
+        },
+        keyboard: {
+          enabled: true,
+          onlyInViewport: false,
+        },
+        slidesPerView: 2.5,
+        breakpoints: {
+          820: {
+            slidesPerView: 2,
+          },
+        }
       }}>
       <SwiperWrapper>
         {tastes.length ? tastes.map((taste, index) => <SwiperSlide><Card taste={taste} currentIndex={index + 1} totalCount={tastes.length} /></SwiperSlide>) : ''}
@@ -165,5 +177,30 @@ const tastes = await getTastes();
     transform: rotate(-90deg) translate(-2%, 57%);
     z-index: 80;
     pointer-events: none;
+  }
+
+  @media screen and (max-width:820px) {
+    #clip-button,
+    #ion-tag {
+      display: none;
+    }
+
+    #break-tag {
+      bottom: auto;
+      right: auto;
+      top: 0;
+      left: 0;
+      transform: rotate(-90deg) translateX(-100%);
+      transform-origin: top left;
+      width: 95dvh;
+      height: 100vw;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .swiper-wrapper,
+    .swiper-slide {
+      position: initial;
+    }
   }
 </style>

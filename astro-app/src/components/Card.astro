@@ -87,4 +87,39 @@ const { taste, currentIndex, totalCount } = Astro.props;
     font-size: 12px;
     height: 43px;
   }
+
+  @media screen and (max-width:820px) {
+    .card {
+      width: 100%;
+    }
+
+    .card-title {
+      width: 100%;
+      position: absolute;
+      top: 16%;
+      left: -30vw;
+      width: 100vw;
+      height: auto;
+      padding: 16px;
+      font-size: 22px;
+    }
+
+    .card-cover {
+      width: 100%;
+    }
+
+    .card-description-container {
+      position: absolute;
+      bottom: 0;
+      left: -30vw;
+      width: 100vw;
+      height: auto;
+      padding: 16px;
+      font-size: 10px;
+    }
+
+    .card-description {
+      text-align: left;
+    }
+  }
 </style>

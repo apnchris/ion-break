@@ -6,7 +6,7 @@ const posts = await getPosts();
 ---
 
 <Layout title="ION Break">
-  <a href="/video" id="clip-button">
+  <a href="/video" id="clip-button" class="glass-button">
     <img
       src="/img/Button_Clip.png"
       alt="Watch the full clip"
@@ -14,7 +14,7 @@ const posts = await getPosts();
     />
   </a>
 
-  <a href="/tastes" id="tastes-button">
+  <a href="/tastes" id="tastes-button" class="glass-button">
     <img
       src="/img/Button_Tastes.png"
       alt="Tastes/Fillings"
@@ -48,5 +48,22 @@ const posts = await getPosts();
   #tastes-button-img {
     width: 100%;
     height: auto;
+  }
+
+  @media screen and (max-width:820px) {
+    #clip-button {
+      top: calc(50% - 35vw);
+      left: 53%;
+      width: 110vw;
+      transform: translate(-50%, -50%) rotate(10deg);
+    }
+
+    #tastes-button {
+      top: auto;
+      bottom: calc(45% - 35vw);
+      left: 48%;
+      width: 110vw;
+      transform: translate(-50%, 50%) rotate(22deg);
+    }
   }
 </style>

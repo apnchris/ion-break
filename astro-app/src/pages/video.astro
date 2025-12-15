@@ -68,28 +68,28 @@ const fullVideo = await getFullVideo();
   </section>
 </Layout>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const video = document.getElementById('full-video') as HTMLVideoElement;
+<script is:inline>
+  document.addEventListener('astro:page-load', () => {
+    const video = document.getElementById('full-video');
     const playButton = document.getElementById('video-play-button');
     const muteButton = document.getElementById('video-mute-button');
 
     if (video && playButton) {
-      playButton.addEventListener('click', () => {
+      playButton.onclick = () => {
         if (video.paused) {
           video.play();
         } else {
           video.pause();
         }
-      });
+      };
     }
 
     if (video && muteButton) {
-      muteButton.addEventListener('click', () => {
+      muteButton.onclick = () => {
         // Fix específico para Chrome
         if (video.muted) {
           // Desmutear: hack para Chrome
-          const tempVolume = video.volume;
+          const tempVolume = video.volume || 1;
           video.volume = 0;
           video.muted = false;
           
@@ -107,7 +107,7 @@ const fullVideo = await getFullVideo();
           // Mutear: directo
           video.muted = true;
         }
-      });
+      };
     }
   });
 </script>
@@ -172,6 +172,22 @@ const fullVideo = await getFullVideo();
     transform: translateX(-150%);
   }
 
+  #video-mute-button:hover img {
+    transform: rotate(5deg) scale(1.03);
+  }
+
+  #video-mute-button:hover:active img {
+    transform: rotate(7deg) scale(1.05);
+  }
+
+  #video-play-button:hover img {
+    transform: rotate(-7deg) scale(.95);
+  }
+
+  #video-play-button:hover:active img {
+    transform: rotate(-10deg) scale(1);
+  }
+
   #back-button {
     position: fixed;
     top: 0;
@@ -184,5 +200,13 @@ const fullVideo = await getFullVideo();
     padding: 0;
     cursor: pointer;
     z-index: 10;
+  }
+
+  #back-button:hover img {
+    transform: rotate(-6deg) scale(.97);
+  }
+
+  #back-button:hover:active img {
+    transform: rotate(-8deg) scale(.92);
   }
 </style>
