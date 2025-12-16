@@ -14,7 +14,7 @@ const fullVideo = await getFullVideo();
       <img
         src="/img/Button_Close.png"
         alt="Close Button"
-        id="video-frame"
+        class="video-button-img"
       />
     </button>
     
@@ -54,7 +54,7 @@ const fullVideo = await getFullVideo();
       <img
         src="/img/Button_Play.png"
         alt="Player Frame"
-        id="video-frame"
+        class="video-button-img"
       />
     </button>
 
@@ -62,7 +62,7 @@ const fullVideo = await getFullVideo();
       <img
         src="/img/Button_Mute.png"
         alt="Player Frame"
-        id="video-frame"
+        class="video-button-img"
       />
     </button>
   </section>
@@ -143,9 +143,11 @@ const fullVideo = await getFullVideo();
     transform: translate(-50%, -50%);
     height: 100%;
     pointer-events: none;
+    line-height: 0;
   }
 
-  #video-frame {
+  #video-frame,
+  .video-button-img {
     height: 100%;
     width: auto;
   }
@@ -208,5 +210,73 @@ const fullVideo = await getFullVideo();
 
   #back-button:hover:active img {
     transform: rotate(-8deg) scale(.92);
+  }
+
+  @media screen and (max-aspect-ratio: 1/1) {
+    #video-container {
+      height: auto;
+      width: 100vw;
+      top: 50%;
+    }
+
+    #video-wrapper {
+      width: 92%;
+      height: auto;
+    }
+
+    #video-frame-container,
+    #full-video,
+    #video-frame {
+      width: 100%;
+      height: auto;
+    }
+
+    #video-frame {
+      width: 100%;
+      height: auto;
+    }
+
+    .video-button-img {
+      height: auto;
+      width: 100%;
+    }
+
+    #back-button .video-button-img {
+      height: 100%;
+      width: auto;
+    }
+
+    #video-play-button,
+    #video-mute-button {
+      bottom: calc(50% - 26.5vw);
+      transform: translateY(110%);
+      width: 25vw;
+      height: auto;
+    }
+
+    #video-play-button {
+      left: 6vw;
+    }
+
+    #video-mute-button {
+      right: 6vw;
+    }
+  }
+
+  @media screen and (max-aspect-ratio: 3/4) {
+    #back-button {
+      top: auto;
+      left: auto;
+      bottom: 0;
+      right: 0;
+      width: 25vw;
+      height: auto;
+      transform: translate(8%, -8%);
+    }
+
+    #back-button .video-button-img {
+      height: auto;
+      width: 100%;
+    }
   }
 </style>
